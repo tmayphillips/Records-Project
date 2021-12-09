@@ -1,0 +1,181 @@
+<div class="topForm">
+  <h1 class="text-center">Your Magic Form</h1>
+  <p class="text-center" style="padding-top: 10px">
+    Welcome to the Magic Number generator! This form is limited to adults 21 and
+    older.
+  </p>
+  <p class="text-center">
+    Please enter the information below to get your magic number.
+  </p>
+
+  <form
+    class="row g-3 mt-2 inputFrm justify-center"
+    #inputFrm="ngForm"
+    (ngSubmit)="onSubmit(inputFrm.valid)"
+  >
+    <div class="col-md-2">
+      <label for="firstName" class="form-label">First name</label>
+      <input
+        type="text"
+        name="firstName"
+        class="form-control validate"
+        id="firstName"
+        #firstName
+        value=""
+        [(ngModel)]="detail.firstName"
+        required
+      />
+    </div>
+    <div class="col-md-2">
+      <label for="lastName" class="form-label">Last name</label>
+      <input
+        type="text"
+        name="lastName"
+        class="form-control validate"
+        id="lastName"
+        #lastName
+        value=""
+        [(ngModel)]="detail.lastName"
+        required
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        name="email"
+        class="form-control validate"
+        id="email"
+        #email
+        [(ngModel)]="detail.email"
+        required
+        email
+      />
+    </div>
+    <div class="break"></div>
+    <div class="col-md-2">
+      <label for="color" class="form-label">Favorite Color</label>
+      <input
+        type="color"
+        name="color"
+        class="form-control"
+        id="color"
+        #color
+        value="#ff0000"
+        [(ngModel)]="detail.favColor"
+      />
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input
+          type="range"
+          name="age"
+          max="120"
+          min="21"
+          class="form-range"
+          id="age"
+          #age
+          [(ngModel)]="detail.age"
+          style="padding-top: 12px"
+        />
+      </div>
+    </div>
+    <div class="col-md-3 age">
+      <p>{{ detail.age }} years old</p>
+    </div>
+
+    <div class="col-md3 justify-center">
+      <button class="btn" type="submit" [disabled]="inputFrm.invalid">
+        Submit form
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="output">
+  <h2
+    class="text-center"
+    [ngStyle]="{
+      display: displaySquare ? 'block' : 'none',
+      color: detail.favColor
+    }"
+  >
+    {{ detail.firstName }}'s Very Own Magicness!
+  </h2>
+  <p
+    class="text-center"
+    [ngStyle]="{
+      display: displaySquare ? 'block' : 'none',
+      color: detail.favColor
+    }"
+  >
+    A little something about your age: {{ numberInfo }}
+  </p>
+
+  <div
+    ngClass="boxOfSquares"
+    [ngStyle]="{
+      display: displaySquare ? 'block' : 'none',
+      color: detail.favColor
+    }"
+  >
+    <div class="row">
+      <div class="col" style="display: flex; flex-direction: row">
+        <div ngClass="smallBox"><p>7</p></div>
+        <div ngClass="smallBox"><p>12</p></div>
+        <div ngClass="smallBox"><p>1</p></div>
+        <div ngClass="smallBox">
+          <p>{{ detail.age - 20 }}</p>
+        </div>
+        <div></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="display: flex; flex-direction: row">
+        <div ngClass="smallBox"><p>2</p></div>
+        <div ngClass="smallBox">
+          <p>{{ detail.age - 21 }}</p>
+        </div>
+        <div ngClass="smallBox"><p>8</p></div>
+        <div ngClass="smallBox"><p>11</p></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="display: flex; flex-direction: row">
+        <div ngClass="smallBox">
+          <p>{{ detail.age - 18 }}</p>
+        </div>
+        <div ngClass="smallBox"><p>3</p></div>
+        <div ngClass="smallBox"><p>10</p></div>
+        <div ngClass="smallBox"><p>5</p></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="display: flex; flex-direction: row">
+        <div ngClass="smallBox"><p>9</p></div>
+        <div ngClass="smallBox"><p>6</p></div>
+        <div ngClass="smallBox">
+          <p>{{ detail.age - 19 }}</p>
+        </div>
+        <div ngClass="smallBox"><p>4</p></div>
+      </div>
+    </div>
+    <div class="row">
+      <button
+        class="btn"
+        type="submit"
+        (click)="
+          onClear();
+          firstName.value = '';
+          lastName.value = '';
+          email.value = '';
+          age.value = '18';
+          color.value = '#000000'
+        "
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+</div>
